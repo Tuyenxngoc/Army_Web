@@ -1,0 +1,86 @@
+RewriteEngine on
+
+# Main rewrite rules
+RewriteRule ^$ /index.php [L]
+
+RewriteRule ^admin/home$ /index.php?page=admin&tab=home [L]
+RewriteRule ^admin/member$ /index.php?page=admin&tab=member [L]
+RewriteRule ^admin/code$ /index.php?page=admin&tab=code [L]
+RewriteRule ^admin/create$ /index.php?page=admin&tab=create [L]
+
+RewriteRule ^admin/edit-giftcode$ /index.php?page=admin&tab=edit-giftcode [L,QSA]
+RewriteRule ^admin/edit$ /index.php?page=admin&tab=edit [L,QSA]
+RewriteRule ^admin/result$ /src/screens/admin/archive/result.php [L]
+
+RewriteRule ^admin/articles$ /admin/articles.php [L]
+RewriteRule ^admin/history$ /admin/history.php [L]
+
+RewriteRule ^admin/edit/result$ /index.php?page=admin&tab=result [L]
+RewriteRule ^admin/edit/result$ /src/screens/admin/archive/result.php [L]
+
+RewriteRule ^post/([^/]+)/?$ /index.php?page=post&id=$1 [L]
+RewriteRule ^post-to/([^/]+)/?$ /index2.php?page=post-to&id=$1 [L]
+
+RewriteRule ^download$ /index.php?page=download [L]
+RewriteRule ^logout$ /index.php?page=logout [L]
+RewriteRule ^ranking$ /index.php?page=ranking [L]
+RewriteRule ^exchange$ /index.php?page=exchange [L]
+RewriteRule ^user/profile$ /index.php?page=user&tab=profile [L]
+RewriteRule ^user/transactions$ /index.php?page=user&tab=transactions [L]
+RewriteRule ^user/change-password$ /index.php?page=user&tab=change-password [L]
+RewriteRule ^user/change-gmail$ /index.php?page=user&tab=change-gmail [L]
+RewriteRule ^user/change-password-two$ /index.php?page=user&tab=change-password-two [L]
+RewriteRule ^team$ /index.php?page=user&tab=team [L]
+
+RewriteRule ^squad/?$ /index.php?page=squad [L,QSA]
+
+RewriteRule ^squad/create$ /index.php?page=squad&tab=create [L]
+RewriteRule ^squad/info$ /index.php?page=squad&tab=info [L]
+
+RewriteRule ^user/add-point$ /index.php?page=user&tab=add-point [L]
+
+RewriteRule ^recharge/momo$ /index.php?page=recharge&tab=momo [L]
+RewriteRule ^recharge/nganhang$ /index.php?page=recharge&tab=nganhang [L]
+RewriteRule ^recharge$ /index.php?page=recharge [L]
+
+RewriteRule ^exchange/coin$ /index.php?page=exchange&tab=coin [L]
+RewriteRule ^exchange/gold$ /index.php?page=exchange&tab=gold [L]
+
+# API routes
+RewriteRule ^apixuli/login$ /apixuli/auth/login.php [L]
+RewriteRule ^apixuli/register$ /apixuli/auth/register.php [L]
+RewriteRule ^apixuli/forgotpassword$ /apixuli/auth/forgotpassword.php [L]
+RewriteRule ^apixuli/verifyUser$ /apixuli/auth/verifyUser.php [L]
+RewriteRule ^apixuli/update$ /apixuli/auth/update.php [L]
+
+RewriteRule ^apixuli/change-password$ /apixuli/auth/change-password.php [L]
+RewriteRule ^apixuli/active$ /apixuli/auth/active.php [L]
+RewriteRule ^apixuli/momo$ /apixuli/charging/momo_cron.php [L]
+RewriteRule ^apixuli/atm$ /apixuli/charging/atm_pay.php [L]
+RewriteRule ^apixuli/getMomoPay$ /apixuli/charging/momo_pay.php [L]
+RewriteRule ^apixuli/getAtmPay$ /apixuli/charging/atm_cron.php [L]
+RewriteRule ^apixuli/getNganhangPay$ /apixuli/charging/nganhang_pay.php [L]
+RewriteRule ^apixuli/exchange-gold$ /apixuli/charging/exchange-gold.php [L]
+RewriteRule ^apixuli/exchange-coin$ /apixuli/charging/exchange-coin.php [L]
+
+RewriteRule ^home$ /index.php [L]
+RewriteRule ^category$ /index2.php [L]
+
+
+
+# Redirect PHP files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)\.php$ $1.php [L,QSA]
+
+# 404 Error Page
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /404 [L]
+
+Options -Indexes
+
+# Prevent directory listing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ - [L]
